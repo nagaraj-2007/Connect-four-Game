@@ -34,7 +34,11 @@ class _BoardState extends State<Board> {
       if (board.checkWin(coin)) {
         _showWinDialog(coin);
       }
+      else if (board.isFull()) {
+  _showDrawDialog(coin);
+}
     }
+    
   }
 
   void _showWinDialog(String winner) {
@@ -61,6 +65,28 @@ class _BoardState extends State<Board> {
           ),
     );
   }
+   void _showDrawDialog(String coin) {
+  showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Text("Draw!"),
+      content: Text("It's a draw between $player1Name and $player2Name."),
+      actions: [
+        TextButton(
+          onPressed: () {
+            setState(() {
+              board.resetBoard();
+              isPlayerOne = true;
+            });
+            Navigator.pop(context);
+          },
+          child: Text("Play Again"),
+        ),
+      ],
+    ),
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {

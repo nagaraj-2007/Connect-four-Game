@@ -72,4 +72,15 @@ class BoardLogic {
 
     return false;
   }
+    bool isFull() {
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        if (grid[row][col] == '_') {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 }
+
